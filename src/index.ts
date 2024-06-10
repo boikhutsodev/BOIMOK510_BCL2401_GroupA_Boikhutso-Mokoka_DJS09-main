@@ -4,16 +4,11 @@
 // parameters the function takes.
 // : boolean
 import "../index.css";
-// Fixing the Website
-
-// Can you fix my code to show 'Welcome back Bobby' in the Nav Bar for
-// our couch surfing website? Do this by assigning types to the parameters
-// we pass to our populateUser function, so that we can be aware of
-// errors in our user objects in the future.
 
 const returningUserDisplay = document.querySelector("#returning-user");
 const userNameDisplay = document.querySelector("#user");
 const reviewTotalDisplay = document.querySelector("#reviews");
+let isOpen: boolean;
 
 const reviews = [
   {
@@ -49,10 +44,15 @@ function showReviewTotal(value: number, reviewer: string, isLoyalty: boolean) {
 
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser);
 
-const you = {
+const you: {
+  userName: string;
+  isReturning: boolean;
+} = {
   userName: "Bobby",
   isReturning: true,
 };
+
+console.log(you.userName);
 
 function populateUser(isReturning: boolean, userName: string) {
   if (isReturning) {
