@@ -53,3 +53,5 @@ function populateUser(isReturning: boolean, userName: string) {
   }
   userNameDisplay.innerHTML = userName;
 }
+
+populateUser(you.isReturning, you.userName);
