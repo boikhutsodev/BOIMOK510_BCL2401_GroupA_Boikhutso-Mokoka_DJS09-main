@@ -61,11 +61,11 @@ const you: {
   stayedAt: ["florida-home", "oman-flat", "tokyo-bungalow"],
 };
 
-function populateUser(isReturning: boolean, userName: string) {
+function populateUser(isReturning: boolean, firstName: string) {
   if (isReturning) {
     returningUserDisplay.innerHTML = "back";
   }
-  userNameDisplay.innerHTML = userName;
+  userNameDisplay.innerHTML = firstName;
 }
 
-populateUser(you.isReturning, you.userName);
+populateUser(you.isReturning, you.firstName);
