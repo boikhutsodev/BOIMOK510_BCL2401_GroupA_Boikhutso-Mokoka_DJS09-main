@@ -12,6 +12,7 @@ import {
   getTopTwoReviews,
 } from "./utils";
 import { Price, Country } from "./types";
+import { Review } from "./interfaces";
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -24,6 +25,7 @@ enum Permissions {
   ADMIN = "ADMIN",
   READ_ONLY = "READ_ONLY",
 }
+
 enum LoyaltyUser {
   GOLD_USER = "GOLD_USER",
   SILVER_USER = "SILVER_USER",
@@ -31,12 +33,7 @@ enum LoyaltyUser {
 }
 
 // Reviews
-const reviews: {
-  name: string;
-  stars: number;
-  loyaltyUser: LoyaltyUser;
-  date: string;
-}[] = [
+const reviews: Review[] = [
   {
     name: "Sheia",
     stars: 5,
@@ -138,16 +135,8 @@ for (let i = 0; i < properties.length; i++) {
   propertyContainer.appendChild(card);
 }
 
-//Broken code
 let count = 0;
-function addReviews(
-  array: {
-    name: string;
-    stars: number;
-    loyaltyUser: LoyaltyUser;
-    date: string;
-  }[]
-): void {
+function addReviews(array: Review[]): void {
   if (!count) {
     count++;
     const topTwo = getTopTwoReviews(array);
@@ -163,7 +152,7 @@ function addReviews(
 
 button.addEventListener("click", () => addReviews(reviews));
 
-let currentLocation: [string, string, number] = ["Rustenburg", "13.13", 22];
+let currentLocation: [string, string, number] = ["Rustenburg", "13:13", 22];
 footer.innerHTML =
   currentLocation[0] +
   " " +
