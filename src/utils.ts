@@ -10,8 +10,9 @@ export function showReviewTotal(
 ) {
   const iconDisplay = LoyaltyUser.GOLD_USER ? "⭐" : "";
   reviewTotalDisplay.innerHTML =
-    "review total " +
     value.toString() +
+    " Review" +
+    makeMultiple(value) +
     "| last reviewed by " +
     reviewer +
     " " +
@@ -37,8 +38,8 @@ export function showDetails(
   }
 }
 
-export function makeMultiple(value: number) {
-  if (value > 1) {
+export function makeMultiple(value: number): string {
+  if (value > 1 || value == 0) {
     return "s";
-  }
+  } else return "";
 }
