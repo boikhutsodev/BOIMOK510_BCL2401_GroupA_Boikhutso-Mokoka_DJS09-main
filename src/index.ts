@@ -5,16 +5,38 @@
 
 import "../index.css";
 
-import { showReviewTotal, populateUser, showDetails } from "./utils";
+import {
+  showReviewTotal,
+  populateUser,
+  showDetails,
+  getTopTwoReviews,
+} from "./utils";
 import { Price, Country } from "./types";
-import { Permissions, LoyaltyUser } from "./enums";
 const propertyContainer = document.querySelector(".properties");
+const reviewContainer = document.querySelector(".reviews");
+const container = document.querySelector(".container");
+const button = document.querySelector("button");
 const footer = document.querySelector(".footer");
 
 let isLoggedIn: boolean;
 
+enum Permissions {
+  ADMIN = "ADMIN",
+  READ_ONLY = "READ_ONLY",
+}
+enum LoyaltyUser {
+  GOLD_USER = "GOLD_USER",
+  SILVER_USER = "SILVER_USER",
+  BRONZE_USER = "BRONZE_USER",
+}
+
 // Reviews
-const reviews: any[] = [
+const reviews: {
+  name: string;
+  stars: number;
+  loyaltyUser: LoyaltyUser;
+  date: string;
+}[] = [
   {
     name: "Sheia",
     stars: 5,
@@ -32,7 +54,6 @@ const reviews: any[] = [
     stars: 4,
     loyaltyUser: LoyaltyUser.SILVER_USER,
     date: "27-03-2021",
-    description: "Great hosts, location was a bit further than said.",
   },
 ];
 
@@ -116,6 +137,31 @@ for (let i = 0; i < properties.length; i++) {
   showDetails(you.permissions, card, properties[i].price);
   propertyContainer.appendChild(card);
 }
+
+//Broken code
+let count = 0;
+function addReviews(
+  array: {
+    name: string;
+    stars: number;
+    loyaltyUser: LoyaltyUser;
+    date: string;
+  }[]
+): void {
+  if (!count) {
+    count++;
+    const topTwo = getTopTwoReviews(array);
+    for (let i = 0; i < topTwo.length; i++) {
+      const card = document.createElement("div");
+      card.classList.add("review-card");
+      card.innerHTML = topTwo[i].stars + " stars from " + topTwo[i].name;
+      reviewContainer.appendChild(card);
+    }
+    container.removeChild(button);
+  }
+}
+
+button.addEventListener("click", () => addReviews(reviews));
 
 let currentLocation: [string, string, number] = ["Rustenburg", "13.13", 22];
 footer.innerHTML =
