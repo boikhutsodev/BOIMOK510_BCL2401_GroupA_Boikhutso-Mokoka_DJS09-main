@@ -12,8 +12,8 @@ import {
   getTopTwoReviews,
 } from "./utils";
 import { Price, Country } from "./types";
-//import { Permissions, LoyaltyUser } from "./enums";
-//import Review from "./interfaces";
+// import { Permissions, LoyaltyUser } from "./enums";
+// import Review from "./interfaces";
 const propertyContainer = document.querySelector(".properties");
 const reviewContainer = document.querySelector(".reviews");
 const container = document.querySelector(".container");
@@ -21,6 +21,17 @@ const button = document.querySelector("button");
 const footer = document.querySelector(".footer");
 
 let isLoggedIn: boolean;
+
+enum Permissions {
+  ADMIN = "ADMIN",
+  READ_ONLY = "READ_ONLY",
+}
+
+enum LoyaltyUser {
+  GOLD_USER = "GOLD_USER",
+  SILVER_USER = "SILVER_USER",
+  BRONZE_USER = "BRONZE_USER",
+}
 
 interface Review {
   name: string;
@@ -115,6 +126,19 @@ const properties: Property[] = [
     contact: [+34829374892553, "andyluger@aol.com"],
     isAvailable: true,
   },
+  {
+    image: "images/malaysian-hotel.jpeg",
+    title: "Malia Hotel",
+    price: 35,
+    location: {
+      firstLine: "Room 4",
+      city: "Malia",
+      code: 45334,
+      country: "Malaysia",
+    },
+    contact: [+60349822083, "lee34@gmail.com"],
+    isAvailable: false,
+  },
 ];
 
 // Functions
@@ -151,7 +175,7 @@ function addReviews(array: Review[]): void {
 
 button.addEventListener("click", () => addReviews(reviews));
 
-let currentLocation: [string, string, number] = ["Rustenburg", "13:13", 22];
+let currentLocation: [string, string, number] = ["London", "11.03", 17];
 footer.innerHTML =
   currentLocation[0] +
   " " +
